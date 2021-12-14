@@ -17,21 +17,24 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  defaultNetwork:"hardhat",
-  networks:{
-    hardhat:{
-      chainId:31137
+  defaultNetwork: "hardhat",
+  networks: {
+    hardhat: {
+      chainId: 31137,
     },
-    avaxTest:{
-      chainId:43113,
-      url:"https://api.avax-test.network/ext/bc/C/rpc"
-    }
+    avaxTest: {
+      chainId: 43113,
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
+    },
   },
   solidity: "0.8.4",
   settings: {
     optimizer: {
       enabled: true,
-      runs: 200
-    }
-  }
+      runs: 200,
+    },
+  },
+  paths: {
+    artifacts: "./src/artifacts",
+  },
 };
