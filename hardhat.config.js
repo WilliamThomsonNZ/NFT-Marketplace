@@ -20,7 +20,7 @@ module.exports = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
-      chainId: 31137,
+      chainId: 31337,
     },
     avaxTest: {
       chainId: 43113,
