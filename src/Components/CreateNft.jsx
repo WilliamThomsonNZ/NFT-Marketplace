@@ -13,7 +13,7 @@ const nftmarketaddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 const CreateNft = () => {
   const [fileUrl, setFileUrl] = useState("");
   const [formInput, setFormInput] = useState({
-    price: "0.5",
+    price: "",
     name: "",
     description: "",
   });
@@ -32,8 +32,9 @@ const CreateNft = () => {
     }
   }
   async function uploadToIpfs() {
-    //const { name, description, price } = formInput;
-    //if (!name || !description || !price || !fileUrl) return;
+    // const { name, description, price } = formInput;
+    // if (!name || !description || !price || !fileUrl) return;
+    console.log(fileUrl);
     const data = JSON.stringify({
       name: "test",
       description: "test",
@@ -57,21 +58,19 @@ const CreateNft = () => {
     const signer = provider.getSigner();
 
     //Create the Item by calling our NFT contract
-
     let contract = new ethers.Contract(nftaddres, NFT.abi, signer);
     let transaction = await contract.createToken(url);
     const tx = await transaction.wait();
     const tokenId = tx.events[0].args[2].toNumber();
-    const price = ethers.utils.parseUnits(formInput.price, "ether");
+    const price = ethers.utils.parseUnits("0.5", "ether");
 
     contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
     const listingPrice = await contract.getListingPrice();
     const lPrice = listingPrice.toString();
     transaction = await contract.createMarketItem(nftaddres, tokenId, price, {
-      value: listingPrice,
+      value: lPrice,
     });
     await transaction.wait();
-
     console.log(tokenId);
   }
 
